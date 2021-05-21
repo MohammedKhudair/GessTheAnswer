@@ -19,7 +19,7 @@ public class ShareActivity extends AppCompatActivity {
         setContentView(R.layout.activity_share);
         mEditTextٍShareDetail=findViewById(R.id.editTextٍShareDetail);
 
-        mQuestionText = getIntent().getStringExtra("question");
+        mQuestionText = getIntent().getStringExtra(Constants.QUESTION);
 
         SharedPreferences sharedPreferences = getSharedPreferences("appPref",MODE_PRIVATE);
             mEditTextٍShareDetail.setText(sharedPreferences.getString("shareTitle",""));
@@ -35,9 +35,9 @@ public class ShareActivity extends AppCompatActivity {
         intent.setType("text/plain");
         startActivity(intent);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("appPref",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_PREF,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("shareTitle",questionTitle);
+        editor.putString(Constants.SHARE_TITLE,questionTitle);
         editor.apply();
     }
 }

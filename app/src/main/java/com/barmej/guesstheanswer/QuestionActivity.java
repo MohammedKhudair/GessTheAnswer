@@ -47,8 +47,8 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedPreferences = getSharedPreferences("appLanguage",MODE_PRIVATE);
-        String language =sharedPreferences.getString("LANGUAGE_KEY","");
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_LANGUAGE,MODE_PRIVATE);
+        String language =sharedPreferences.getString(Constants.LANGUAGE_KEY,"");
         if (!language.equals("")){
             LocaleHelper.setLocale(QuestionActivity.this,language);
         }
@@ -82,7 +82,7 @@ public class QuestionActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "الاجابه خطأ", Toast.LENGTH_SHORT).show();
             Intent intent =new Intent(QuestionActivity.this,AnswerActivity.class);
-            intent.putExtra("question_answer",mCurrentAnswerDetail);
+            intent.putExtra(Constants.QUESTION_ANSWER,mCurrentAnswerDetail);
             startActivity(intent);
             CustomIntent.customType(QuestionActivity.this,"right-to-left");
         }
@@ -95,7 +95,7 @@ public class QuestionActivity extends AppCompatActivity {
         }  else{
             Toast.makeText(this, "الاجابه خطأ", Toast.LENGTH_SHORT).show();
             Intent intent =new Intent(QuestionActivity.this,AnswerActivity.class);
-            intent.putExtra("question_answer",mCurrentAnswerDetail);
+            intent.putExtra(Constants.QUESTION_ANSWER,mCurrentAnswerDetail);
           //  startActivity(intent);
             // ابدأ نشاطًا باستخدام الرسوم المتحركة 1
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
@@ -107,7 +107,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     public void onShareQuestion(View view) {
         Intent intent =new Intent(QuestionActivity.this,ShareActivity.class);
-        intent.putExtra("question",mCurrentQuestion);
+        intent.putExtra(Constants.QUESTION,mCurrentQuestion);
         startActivity(intent);
         CustomIntent.customType(QuestionActivity.this,"right-to-left");
     }
@@ -163,9 +163,9 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void saveLanguage(String language){
-        SharedPreferences sharedPreferences = getSharedPreferences("appLanguage",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_LANGUAGE,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("LANGUAGE_KEY",language);
+        editor.putString(Constants.LANGUAGE_KEY,language);
         editor.apply();
     }
 
